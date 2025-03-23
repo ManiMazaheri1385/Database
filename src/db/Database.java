@@ -11,14 +11,28 @@ public class Database {
 
     public static void add(Entity e) {
         e.id = identifier;
-        entities.add(e.copy());
+
+        try {
+            entities.add(e.clone());
+        }
+        catch (CloneNotSupportedException ex) {
+            System.out.println("Cloning failed!");
+        }
+
         identifier++;
     }
 
     public static Entity get(int id) throws EntityNotFoundException {
         for (Entity e : entities) {
             if (e.id == id) {
-                return e.copy();
+
+                try {
+                    return e.clone();
+                }
+                catch (CloneNotSupportedException ex) {
+                    System.out.println("Cloning failed!");
+                }
+
             }
         }
         throw new EntityNotFoundException(id);
@@ -32,7 +46,14 @@ public class Database {
     public static void update(Entity e) throws EntityNotFoundException {
         get(e.id);
         int index = entities.indexOf(e);
-        entities.set(index, e.copy());
+
+        try {
+            entities.set(index, e.clone());
+        }
+        catch (CloneNotSupportedException ex) {
+            System.out.println("Cloning failed!");
+        }
+
     }
 
 }
