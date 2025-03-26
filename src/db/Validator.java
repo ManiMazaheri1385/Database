@@ -1,6 +1,6 @@
 package db;
 
-import db.exception.*;
+import db.exception.InvalidEntityException;
 
 public interface Validator {
     void validate(Entity entity) throws InvalidEntityException;

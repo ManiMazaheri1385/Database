@@ -15,30 +15,15 @@ public class Database {
     public static void add(Entity entity) throws InvalidEntityException {
         Validator validator = validators.get(entity.getEntityCode());
         validator.validate(entity);
-
         entity.id = identifier;
-
-        try {
-            entities.add(entity.clone());
-        }
-        catch (CloneNotSupportedException ex) {
-            System.out.println("Cloning failed!");
-        }
-
+        entities.add(entity.clone());
         identifier++;
     }
 
     public static Entity get(int id) throws EntityNotFoundException {
         for (Entity entity : entities) {
             if (entity.id == id) {
-
-                try {
-                    return entity.clone();
-                }
-                catch (CloneNotSupportedException e) {
-                    System.out.println("Cloning failed!");
-                }
-
+                return entity.clone();
             }
         }
         throw new EntityNotFoundException(id);
@@ -52,16 +37,9 @@ public class Database {
     public static void update(Entity entity) throws EntityNotFoundException, InvalidEntityException {
         Validator validator = validators.get(entity.getEntityCode());
         validator.validate(entity);
-
         get(entity.id);
         int index = entities.indexOf(entity);
-
-        try {
-            entities.set(index, entity.clone());
-        }
-        catch (CloneNotSupportedException ex) {
-            System.out.println("Cloning failed!");
-        }
+        entities.set(index, entity.clone());
     }
 
     public static void registerValidator(int entityCode, Validator validator) {
