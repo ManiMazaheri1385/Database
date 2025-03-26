@@ -1,6 +1,6 @@
 package example;
 
-import db.*;
+import db.Entity;
 
 public class Human extends Entity implements Cloneable {
     public static final int HUMAN_ENTITY_CODE = 14;
