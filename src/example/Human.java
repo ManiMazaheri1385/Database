@@ -19,7 +19,7 @@ public class Human extends Entity implements Cloneable {
     }
 
     @Override
-    public Human clone() throws CloneNotSupportedException {
+    public Human clone() {
         return (Human) super.clone();
     }
 

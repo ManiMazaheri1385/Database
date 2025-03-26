@@ -6,8 +6,14 @@ public abstract class Entity implements Cloneable {
     public abstract int getEntityCode();
 
     @Override
-    public Entity clone() throws CloneNotSupportedException {
-        return (Entity) super.clone();
+    public Entity clone() {
+        try {
+            return (Entity) super.clone();
+        }
+        catch (CloneNotSupportedException e) {
+            System.out.println("Cloning failed!");
+            return null;
+        }
     }
 
 }
