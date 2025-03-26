@@ -1,6 +1,7 @@
-package db;
+package example;
 
-import example.*;
+import db.Entity;
+import db.Validator;
 import db.exception.*;
 
 public class HumanValidator implements Validator {
