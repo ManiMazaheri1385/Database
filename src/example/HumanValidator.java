@@ -1,8 +1,7 @@
 package example;
 
-import db.Entity;
-import db.Validator;
-import db.exception.*;
+import db.*;
+import db.exception.InvalidEntityException;
 
 public class HumanValidator implements Validator {
     public void validate(Entity entity) throws InvalidEntityException {
