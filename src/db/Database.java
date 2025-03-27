@@ -14,8 +14,10 @@ public class Database {
     private Database() {}
 
     public static void add(Entity entity) throws InvalidEntityException {
-        Validator validator = validators.get(entity.getEntityCode());
-        validator.validate(entity);
+        if (entity instanceof Validator) {
+            Validator validator = validators.get(entity.getEntityCode());
+            validator.validate(entity);
+        }
 
         if (entity instanceof Trackable) {
             Date now = new Date();
@@ -43,8 +45,10 @@ public class Database {
     }
 
     public static void update(Entity entity) throws EntityNotFoundException, InvalidEntityException {
-        Validator validator = validators.get(entity.getEntityCode());
-        validator.validate(entity);
+        if (entity instanceof Validator) {
+            Validator validator = validators.get(entity.getEntityCode());
+            validator.validate(entity);
+        }
 
         get(entity.id);
 
