@@ -39,4 +39,9 @@ public class Document extends Entity implements Trackable {
         return lastModificationDate;
     }
 
+    @Override
+    public Document clone() {
+        return (Document) super.clone();
+    }
+
 }
