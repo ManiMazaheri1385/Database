@@ -1,6 +1,8 @@
 package db;
 
 import db.exception.*;
+import todo.entity.Task;
+import todo.service.TaskService;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,11 +21,9 @@ public class Database {
             validator.validate(entity);
         }
 
-        if (entity instanceof Trackable) {
-            Date now = new Date();
-            ((Trackable) entity).setCreationDate(now);
-            ((Trackable) entity).setLastModificationDate(now);
-        }
+        Date now = new Date();
+        entity.creationDate = now;
+        entity.lastModificationDate = now;
 
         entity.id = identifier;
         entities.add(entity.clone());
@@ -41,6 +41,14 @@ public class Database {
 
     public static void delete(int id) throws EntityNotFoundException {
         Entity entity = get(id);
+
+        if (entity instanceof Task task) {
+            ArrayList<Entity> steps = TaskService.getTaskSteps(task.id);
+            for (Entity step : steps) {
+                entities.remove(step);
+            }
+        }
+
         entities.remove(entity);
     }
 
@@ -52,10 +60,8 @@ public class Database {
 
         get(entity.id);
 
-        if (entity instanceof Trackable) {
-            Date now = new Date();
-            ((Trackable) entity).setLastModificationDate(now);
-        }
+        Date now = new Date();
+        entity.lastModificationDate = now;
 
         int index = entities.indexOf(entity);
         entities.set(index, entity.clone());
@@ -66,6 +72,16 @@ public class Database {
             throw new IllegalArgumentException("Entity with code " + entityCode + " already exists");
         }
         validators.put(entityCode, validator);
+    }
+
+    public static ArrayList<Entity> getAll(int entityCode) {
+        ArrayList<Entity> sameEntityCode = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (entity.getEntityCode() == entityCode) {
+                sameEntityCode.add(entity.clone());
+            }
+        }
+        return sameEntityCode;
     }
 
 }
