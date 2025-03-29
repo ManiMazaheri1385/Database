@@ -41,6 +41,14 @@ public class Database {
 
     public static void delete(int id) throws EntityNotFoundException {
         Entity entity = get(id);
+
+        if (entity instanceof Task task) {
+            ArrayList<Entity> steps = TaskService.getTaskSteps(task.id);
+            for (Entity step : steps) {
+                entities.remove(step);
+            }
+        }
+
         entities.remove(entity);
     }
 
