@@ -1,6 +1,8 @@
 package db;
 
 import db.exception.*;
+import todo.entity.Task;
+import todo.service.TaskService;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,11 +21,9 @@ public class Database {
             validator.validate(entity);
         }
 
-        if (entity instanceof Trackable) {
-            Date now = new Date();
-            ((Trackable) entity).setCreationDate(now);
-            ((Trackable) entity).setLastModificationDate(now);
-        }
+        Date now = new Date();
+        entity.creationDate = now;
+        entity.lastModificationDate = now;
 
         entity.id = identifier;
         entities.add(entity.clone());
@@ -60,10 +60,8 @@ public class Database {
 
         get(entity.id);
 
-        if (entity instanceof Trackable) {
-            Date now = new Date();
-            ((Trackable) entity).setLastModificationDate(now);
-        }
+        Date now = new Date();
+        entity.lastModificationDate = now;
 
         int index = entities.indexOf(entity);
         entities.set(index, entity.clone());
