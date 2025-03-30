@@ -9,6 +9,8 @@ public abstract class Entity implements Cloneable {
 
     public abstract int getEntityCode();
 
+    public abstract boolean hasValidator();
+
     @Override
     public Entity clone() {
         try {
