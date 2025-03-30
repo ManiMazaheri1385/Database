@@ -1,11 +1,11 @@
 package db;
 
+import todo.entity.*;
 import db.exception.*;
-import todo.entity.Task;
-import todo.service.TaskService;
 import java.util.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ArrayList;
+import todo.service.TaskService;
 
 public class Database {
     private static int identifier = 1;
@@ -69,7 +69,7 @@ public class Database {
 
     public static void registerValidator(int entityCode, Validator validator) {
         if (validators.containsKey(entityCode)) {
-            throw new IllegalArgumentException("Entity with code " + entityCode + " already exists");
+            throw new IllegalArgumentException("Entity with code " + entityCode + " already exists.");
         }
         validators.put(entityCode, validator);
     }

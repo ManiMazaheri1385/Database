@@ -1,12 +1,15 @@
 package todo.service;
 
-import db.Database;
 import db.Entity;
-import db.exception.InvalidEntityException;
-import todo.entity.Task;
+import db.Database;
+import todo.entity.*;
+import java.util.Date;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import db.exception.InvalidEntityException;
 
 public class TaskService {
     public static Scanner scanner = new Scanner(System.in);
@@ -192,15 +195,6 @@ public class TaskService {
         return sortedTasks;
     }
 
-    public static ArrayList<Task> getIncompleteTasks(int taskID) {
-        ArrayList<Task> tasks = getSortedTasks();
-        ArrayList<Task> incompleteTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.status == Task.Status.InProgress || task.status == Task.Status.NotStarted) {
-                incompleteTasks.add(task);
-            }
-        }
-        return incompleteTasks;
     public static Date date(String dateString) {
         try {
             return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);

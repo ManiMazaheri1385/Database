@@ -1,8 +1,10 @@
 package todo.service;
 
 import db.Database;
+import todo.entity.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 import db.exception.InvalidEntityException;
-import todo.entity.Step;
 
 public class StepService {
     public static Scanner scanner = new Scanner(System.in);
@@ -20,8 +22,6 @@ public class StepService {
 
         try {
             Database.add(step);
-        }
-        catch (InvalidEntityException e) {
             TaskService.setAsInProgress(taskID);
             System.out.println("Step saved successfully.");
             System.out.println("ID: " + step.id);

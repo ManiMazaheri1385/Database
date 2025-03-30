@@ -2,8 +2,8 @@ package todo.validator;
 
 import db.Entity;
 import db.Validator;
-import db.exception.InvalidEntityException;
 import todo.entity.Task;
+import db.exception.InvalidEntityException;
 
 public class TaskValidator implements Validator {
 

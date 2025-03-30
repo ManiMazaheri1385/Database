@@ -1,8 +1,8 @@
 package todo.validator;
 
 import db.*;
+import todo.entity.*;
 import db.exception.*;
-import todo.entity.Step;
 
 public class StepValidator implements Validator {
 
