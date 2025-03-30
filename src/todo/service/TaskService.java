@@ -107,13 +107,6 @@ public class TaskService {
     }
     // -------------------------------------------------------------------------------------------
 
-    public static ArrayList<Entity> getTaskSteps(int taskID) {
-        ArrayList<Entity> tasks = Database.getAll(Task.TASK_ENTITY_CODE);
-        ArrayList<Entity> taskSteps = new ArrayList<>();
-        for (Entity entity : tasks) {
-            Task task = (Task) entity;
-            if (taskID == task.id) {
-                taskSteps.add(task);
     // status automatic updates
     // *******************************************************************************************
     public static void setAsInProgress(int taskID) {
@@ -164,9 +157,28 @@ public class TaskService {
 
     }
     // *******************************************************************************************
+
+    public static ArrayList<Step> getTaskSteps(int taskID) {
+        ArrayList<Entity> steps = Database.getAll(Step.STEP_ENTITY_CODE);
+        ArrayList<Step> taskSteps = new ArrayList<>();
+        for (Entity entity : steps) {
+            Step step = (Step) entity;
+            if (taskID == step.taskRef) {
+                taskSteps.add(step);
             }
         }
         return taskSteps;
+    }
+
+    public static ArrayList<Task> getIncompleteTasks() {
+        ArrayList<Task> tasks = getSortedTasks();
+        ArrayList<Task> incompleteTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.status == Task.Status.InProgress || task.status == Task.Status.NotStarted) {
+                incompleteTasks.add(task);
+            }
+        }
+        return incompleteTasks;
     }
 
     public static ArrayList<Task> getSortedTasks() {
