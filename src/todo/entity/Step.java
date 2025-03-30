@@ -25,6 +25,11 @@ public class Step extends Entity {
     }
 
     @Override
+    public boolean hasValidator() {
+        return true;
+    }
+
+    @Override
     public Step clone() {
         return (Step) super.clone();
     }

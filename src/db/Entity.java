@@ -9,12 +9,16 @@ public abstract class Entity implements Cloneable {
 
     public abstract int getEntityCode();
 
+    public abstract boolean hasValidator();
+
     @Override
     public Entity clone() {
         try {
-            return (Entity) super.clone();
-        }
-        catch (CloneNotSupportedException e) {
+            Entity cloned = (Entity) super.clone();
+            cloned.creationDate = (Date) creationDate.clone();
+            cloned.lastModificationDate = (Date) lastModificationDate.clone();
+            return cloned;
+        } catch (CloneNotSupportedException e) {
             System.out.println("Cloning failed!");
             return null;
         }

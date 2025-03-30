@@ -29,6 +29,11 @@ public class Task extends Entity implements Trackable {
     }
 
     @Override
+    public boolean hasValidator() {
+        return true;
+    }
+
+    @Override
     public void setCreationDate(Date date) {
         this.creationDate = date;
     }
