@@ -15,9 +15,11 @@ public class StepValidator implements Validator {
             throw new InvalidEntityException("Cannot save step.\nError: Step title cannot be empty.");
         }
         try {
-            Database.get(step.taskRef);
-        }
-        catch (EntityNotFoundException e) {
+            Entity e = Database.get(step.taskRef);
+            if (!(e instanceof Task)) {
+                throw new EntityNotFoundException();
+            }
+        } catch (EntityNotFoundException e) {
             throw new InvalidEntityException("Cannot save step.\nError: Cannot find task with ID=" + step.taskRef + ".");
         }
     }
