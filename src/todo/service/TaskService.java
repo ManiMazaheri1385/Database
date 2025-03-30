@@ -209,6 +209,23 @@ public class TaskService {
         }
     }
 
+    public static void updateSuccessfully(Task task, String field, String oldValue, String newValue) {
+        System.out.println("Successfully updated the task.");
+        System.out.println("Field: " + field);
+        System.out.println("Old Value: " + oldValue);
+        System.out.println("New Value: " + newValue);
+        System.out.println("Modification Date: " + task.lastModificationDate);
+    }
+
+    public static void printTask(Task task) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        System.out.println("ID: " + task.id);
+        System.out.println("Title: " + task.title);
+        System.out.println("Description: " + task.description);
+        System.out.println("Due date: " + dateFormat.format(task.dueDate));
+        System.out.println("Status: " + task.status);
+        StepService.printSteps(task.id);
     }
 
 }

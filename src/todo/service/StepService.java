@@ -113,6 +113,27 @@ public class StepService {
 
     }
     // *******************************************************************************************
+
+    public static void updateSuccessfully(Step step, String field, String oldValue, String newValue) {
+        System.out.println("Successfully updated the step.");
+        System.out.println("Field: " + field);
+        System.out.println("Old Value: " + oldValue);
+        System.out.println("New Value: " + newValue);
+        System.out.println("Modification Date: " + step.lastModificationDate);
+    }
+
+    public static void printSteps(int taskID) {
+        ArrayList<Step> taskSteps = TaskService.getTaskSteps(taskID);
+        if (taskSteps.isEmpty()) {
+            return;
+        }
+
+        System.out.println("Steps: ");
+        for (Step step : taskSteps) {
+            System.out.println("    + " + step.title);
+            System.out.println("        ID: " + step.id);
+            System.out.println("        Status: " + step.status);
+        }
     }
 
 }
