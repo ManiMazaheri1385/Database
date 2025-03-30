@@ -5,6 +5,8 @@ import db.exception.InvalidEntityException;
 import todo.entity.Step;
 
 public class StepService {
+    public static Scanner scanner = new Scanner(System.in);
+
     private StepService() {}
 
     public static void addStep() {
@@ -30,20 +32,87 @@ public class StepService {
 
     }
 
-            System.out.println(e.getMessage());
-        }
-        System.out.println("Step saved successfully.\n" + "ID: " + step.id + "\nCreation Date: " + step.creationDate);
-    }
-
-    public static void setAsCompleted(int stepID) {
+    // update fields:
+    // -------------------------------------------------------------------------------------------
+    public static void updateTaskRef(int stepID) {
         Step step = (Step) Database.get(stepID);
-        step.status = Step.Status.Completed;
+
+        String oldValue = String.valueOf(step.taskRef);
+        System.out.print("New Value: ");
+        String newValue = scanner.nextLine().trim();
+        step.taskRef = Integer.parseInt(newValue);
+
         try {
             Database.update(step);
-        }
-        catch (InvalidEntityException e) {
+            updateSuccessfully(step, "taskRef", oldValue, newValue);
+        } catch (InvalidEntityException e) {
             System.out.println(e.getMessage());
         }
+
+    }
+
+    public static void updateTitle(int stepID) {
+        Step step = (Step) Database.get(stepID);
+
+        String oldValue = step.title;
+        System.out.print("New Value: ");
+        String newValue = scanner.nextLine().trim();
+        step.title = newValue;
+
+        try {
+            Database.update(step);
+            updateSuccessfully(step, "title", oldValue, newValue);
+        } catch (InvalidEntityException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public static void updateStatus(int stepID) {
+        Step step = (Step) Database.get(stepID);
+
+        String oldValue = String.valueOf(step.status);
+        System.out.print("New Value: ");
+        String newValue = scanner.nextLine().trim();
+        step.status = Step.Status.valueOf(newValue);
+
+        try {
+            Database.update(step);
+            TaskService.setAsInProgress(step.taskRef);
+            setAsCompleted(step);
+            updateSuccessfully(step, "status", oldValue, newValue);
+        } catch (InvalidEntityException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    // -------------------------------------------------------------------------------------------
+
+    // status automatic updates
+    // *******************************************************************************************
+    public static void setAsCompleted(Step step) {
+        Task task = (Task) Database.get(step.taskRef);
+        if (task.status == Task.Status.Completed) {
+            return;
+        }
+
+        ArrayList<Step> taskSteps = TaskService.getTaskSteps(step.taskRef);
+        for (Step taskStep : taskSteps) {
+            if (taskStep.status == Step.Status.Completed) {
+                continue;
+            }
+            return;
+        }
+
+        task.status = Task.Status.Completed;
+        try {
+            Database.update(task);
+        } catch (InvalidEntityException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    // *******************************************************************************************
     }
 
 }
