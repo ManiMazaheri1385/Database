@@ -11,15 +11,25 @@ import java.util.Date;
 public class TaskService {
     private TaskService() {}
 
-    public static void saveTask(String title, String description, Date dueDate) {
+    public static void addTask() {
+        System.out.print("Title: ");
+        String title = scanner.nextLine().trim();
+
+        System.out.print("Description: ");
+        String description = scanner.nextLine().trim();
+
+        System.out.print("Due date (yyyy-MM-dd): ");
+        Date dueDate = date(scanner.nextLine().trim());
+
         Task task = new Task(title, description, dueDate);
         try {
             Database.add(task);
-        }
-        catch (InvalidEntityException e) {
+            System.out.println("Task saved successfully.");
+            System.out.println("ID: " + task.id);
+        } catch (InvalidEntityException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Task saved successfully.\nID: " + task.id);
+
     }
 
     public static void setAsInProgress(int taskID) {
