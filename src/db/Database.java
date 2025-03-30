@@ -16,7 +16,7 @@ public class Database {
     private Database() {}
 
     public static void add(Entity entity) throws InvalidEntityException {
-        if (entity instanceof Validator) {
+        if (entity.hasValidator()) {
             Validator validator = validators.get(entity.getEntityCode());
             validator.validate(entity);
         }
@@ -53,7 +53,7 @@ public class Database {
     }
 
     public static void update(Entity entity) throws EntityNotFoundException, InvalidEntityException {
-        if (entity instanceof Validator) {
+        if (entity.hasValidator()) {
             Validator validator = validators.get(entity.getEntityCode());
             validator.validate(entity);
         }
