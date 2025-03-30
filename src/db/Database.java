@@ -43,7 +43,7 @@ public class Database {
         Entity entity = get(id);
 
         if (entity instanceof Task task) {
-            ArrayList<Entity> steps = TaskService.getTaskSteps(task.id);
+            ArrayList<Step> steps = TaskService.getTaskSteps(task.id);
             for (Entity step : steps) {
                 entities.remove(step);
             }
