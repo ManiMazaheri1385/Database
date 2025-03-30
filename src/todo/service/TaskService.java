@@ -201,6 +201,14 @@ public class TaskService {
             }
         }
         return incompleteTasks;
+    public static Date date(String dateString) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException("Cannot save task.\nError: Invalid date format.");
+        }
+    }
+
     }
 
 }
