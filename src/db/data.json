@@ -1,0 +1,94 @@
+[
+    {
+        "lastModificationDate": "Mon Mar 31 14:00:14 GMT+03:30 2025",
+        "entityCode": 1,
+        "dueDate": "2025-04-04",
+        "description": "for Eid",
+        "id": 1,
+        "title": "AP Project",
+        "creationDate": "Mon Mar 31 13:51:43 GMT+03:30 2025",
+        "status": "Completed"
+    },
+    {
+        "taskRef": 1,
+        "lastModificationDate": "Mon Mar 31 13:55:16 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 2,
+        "title": "Initial Database Design",
+        "creationDate": "Mon Mar 31 13:52:11 GMT+03:30 2025",
+        "status": "Completed"
+    },
+    {
+        "taskRef": 1,
+        "lastModificationDate": "Mon Mar 31 13:55:16 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 3,
+        "title": "Copy Objects",
+        "creationDate": "Mon Mar 31 13:52:42 GMT+03:30 2025",
+        "status": "Completed"
+    },
+    {
+        "taskRef": 1,
+        "lastModificationDate": "Mon Mar 31 13:55:16 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 4,
+        "title": "Add Validators",
+        "creationDate": "Mon Mar 31 13:53:06 GMT+03:30 2025",
+        "status": "Completed"
+    },
+    {
+        "taskRef": 1,
+        "lastModificationDate": "Mon Mar 31 13:55:16 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 5,
+        "title": "Add Creation and Last Modification Date",
+        "creationDate": "Mon Mar 31 13:53:43 GMT+03:30 2025",
+        "status": "Completed"
+    },
+    {
+        "taskRef": 1,
+        "lastModificationDate": "Mon Mar 31 13:55:16 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 6,
+        "title": "Create a To-Do List",
+        "creationDate": "Mon Mar 31 13:54:07 GMT+03:30 2025",
+        "status": "Completed"
+    },
+    {
+        "taskRef": 1,
+        "lastModificationDate": "Mon Mar 31 13:55:16 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 7,
+        "title": "Save",
+        "creationDate": "Mon Mar 31 13:54:25 GMT+03:30 2025",
+        "status": "Completed"
+    },
+    {
+        "lastModificationDate": "Mon Mar 31 14:00:53 GMT+03:30 2025",
+        "entityCode": 1,
+        "dueDate": "2020-01-01",
+        "description": "play video games",
+        "id": 8,
+        "title": "Entertainment",
+        "creationDate": "Mon Mar 31 13:57:45 GMT+03:30 2025",
+        "status": "NotStarted"
+    },
+    {
+        "taskRef": 8,
+        "lastModificationDate": "Mon Mar 31 14:00:14 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 9,
+        "title": "play Last of Us part I",
+        "creationDate": "Mon Mar 31 13:58:11 GMT+03:30 2025",
+        "status": "NotStarted"
+    },
+    {
+        "taskRef": 8,
+        "lastModificationDate": "Mon Mar 31 14:00:53 GMT+03:30 2025",
+        "entityCode": 2,
+        "id": 10,
+        "title": "play Last of Us part II",
+        "creationDate": "Mon Mar 31 14:00:53 GMT+03:30 2025",
+        "status": "NotStarted"
+    }
+]
