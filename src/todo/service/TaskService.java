@@ -83,7 +83,7 @@ public class TaskService {
 
         try {
             Database.update(task);
-            setAsCompleted(task);
+            automaticUpdateStatus(task);
             updateSuccessfully(task, "status", oldValue, newValue);
         } catch (InvalidEntityException e) {
             System.out.println(e.getMessage());
@@ -110,37 +110,8 @@ public class TaskService {
     }
     // -------------------------------------------------------------------------------------------
 
-    // status automatic updates
-    // *******************************************************************************************
-    public static void setAsInProgress(int taskID) {
-        Task task = (Task) Database.get(taskID);
-
+    public static void automaticUpdateStatus(Task task) {
         if (task.status == Task.Status.InProgress) {
-            return;
-        }
-        if (task.status == Task.Status.NotStarted) {
-            ArrayList<Step> taskSteps = TaskService.getTaskSteps(taskID);
-            for (Step taskStep : taskSteps) {
-                if (taskStep.status == Step.Status.Completed) {
-                    break;
-                }
-                if (taskSteps.size() - taskSteps.indexOf(taskStep) == 1) {
-                    return;
-                }
-            }
-        }
-
-        task.status = Task.Status.InProgress;
-        try {
-            Database.update(task);
-        } catch (InvalidEntityException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-
-    public static void setAsCompleted(Task task) {
-        if (task.status != Task.Status.Completed) {
             return;
         }
 
@@ -149,8 +120,13 @@ public class TaskService {
             return;
         }
 
+        Step.Status status = Step.Status.NotStarted;
+        if (task.status == Task.Status.Completed) {
+            status = Step.Status.Completed;
+        }
+
         for (Step taskStep : taskSteps) {
-            taskStep.status = Step.Status.Completed;
+            taskStep.status = status;
             try {
                 Database.update(taskStep);
             } catch (InvalidEntityException e) {
@@ -159,7 +135,6 @@ public class TaskService {
         }
 
     }
-    // *******************************************************************************************
 
     public static ArrayList<Step> getTaskSteps(int taskID) {
         ArrayList<Entity> steps = Database.getAll(Step.STEP_ENTITY_CODE);
