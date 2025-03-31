@@ -4,6 +4,7 @@ import db.Database;
 import todo.entity.*;
 import todo.service.*;
 import todo.validator.*;
+import todo.serializer.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -15,6 +16,14 @@ public class CommandLine {
         StepValidator stepValidator = new StepValidator();
         Database.registerValidator(Task.TASK_ENTITY_CODE, taskValidator);
         Database.registerValidator(Step.STEP_ENTITY_CODE, stepValidator);
+
+        TaskSerializer taskSerializer = new TaskSerializer();
+        StepSerializer stepSerializer = new StepSerializer();
+        Database.registerSerializer(Task.TASK_ENTITY_CODE, taskSerializer);
+        Database.registerSerializer(Step.STEP_ENTITY_CODE, stepSerializer);
+
+        Database.load();
+        System.out.println();
 
         while (true) {
             System.out.print("> ");
@@ -29,6 +38,10 @@ public class CommandLine {
 
             System.out.println();
         }
+
+        System.out.println();
+        Database.save();
+
     }
 
     public void processCommand(String command) {
