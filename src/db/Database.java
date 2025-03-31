@@ -12,6 +12,7 @@ public class Database {
 
     private static ArrayList<Entity> entities = new ArrayList<>();
     private static HashMap<Integer, Validator> validators = new HashMap<>();
+    private static HashMap<Integer, Serializer> serializers = new HashMap<>();
 
     private Database() {}
 
@@ -82,6 +83,20 @@ public class Database {
             }
         }
         return sameEntityCode;
+    }
+
+    public static void registerValidator(int entityCode, Validator validator) {
+        if (validators.containsKey(entityCode)) {
+            throw new IllegalArgumentException("Entity with code " + entityCode + " already registered in validators.");
+        }
+        validators.put(entityCode, validator);
+    }
+
+    public static void registerSerializer(int entityCode, Serializer serializer) {
+        if (serializers.containsKey(entityCode)) {
+            throw new IllegalArgumentException("Entity with code " + entityCode + " already registered in serializers.");
+        }
+        serializers.put(entityCode, serializer);
     }
 
 }
